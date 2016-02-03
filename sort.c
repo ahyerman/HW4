@@ -10,6 +10,10 @@ int compare(int a, int b) {
 	    return a - b;
 }
 
+int compare2(const void *a, const void *b) {
+	return compare(*(int *)a, *(int *)b);
+}
+
 void bubble_sort(int *numbers, unsigned count) {
 	int temp;
 	int i, j;
@@ -57,5 +61,9 @@ void insertion_sort(int *numbers, unsigned count) {
 	memcpy(numbers, new, count*sizeof(int));
 }
 
-sorting_fn sorting_fns[] = {bubble_sort, insertion_sort, NULL};
+void quick_sort(int *numbers, unsigned count) {
+	qsort(numbers, count, sizeof(int), compare2);
+}
+
+sorting_fn sorting_fns[] = {bubble_sort, insertion_sort, quick_sort, NULL};
 
